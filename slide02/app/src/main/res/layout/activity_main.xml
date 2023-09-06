@@ -5,141 +5,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".MainActivity">
 
-
-    <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="189dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Welcome Homer"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeText">
-
-        <TextView
-            android:id="@+id/headLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please give generously"
-            android:textColor="#7f7f7f"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="129dp"
-            android:layout_height="wrap_content"
-            android:text="Paypal"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="129dp"
-            android:layout_height="wrap_content"
-            android:text="Direct"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </RadioGroup>
-
-    <NumberPicker
-        android:id="@+id/selectNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectNum" />
-
-    <LinearLayout
-        android:id="@+id/editAmountGroup"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar">
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <TextView
-            android:id="@+id/amount"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Amount"
-            android:textColor="#7f7f7f"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/editAmount"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="#0096FF"
-            android:ems="10"
-            android:layout_marginLeft="5dp"
-            android:hint="money"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editAmountGroup">
-
-        <Button
-            android:id="@+id/donateBut"
-            android:layout_width="wrap_content"
+            android:id="@+id/welcomeText"
+            android:layout_width="189dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="DONATE"
-            android:textColor="#1d1d1d"
-            android:textSize="18sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Welcome Homer"
+            android:textSize="25sp"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="4dp"
-            tools:layout_editor_absoluteY="399dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/currentMon"
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/donateBut"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/donateBut"
-            android:gravity="center_horizontal|bottom"
-            android:text="Total so Far  $1998"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteY="419dp" />
-    </RelativeLayout>
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeText">
 
-    <ImageButton
-        android:id="@+id/sendMail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="4dp"
-        android:contentDescription="send email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            <TextView
+                android:id="@+id/headLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please give generously"
+                android:textColor="#7f7f7f"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:text="Paypal"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="129dp"
+                android:layout_height="wrap_content"
+                android:text="Direct"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <NumberPicker
+            android:id="@+id/selectNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="116dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectNum" />
+
+        <LinearLayout
+            android:id="@+id/editAmountGroup"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressBar">
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Amount"
+                android:textColor="#7f7f7f"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#0096FF"
+                android:ems="10"
+                android:hint="money"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editAmountGroup">
+
+            <Button
+                android:id="@+id/donateBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#7f7f7f"
+                android:text="DONATE"
+                android:textColor="#b6b8b6"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/currentMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/donateBut"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/donateBut"
+                android:gravity="center_horizontal|bottom"
+                android:text="Total so Far  $1998"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteY="419dp" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/sendMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
