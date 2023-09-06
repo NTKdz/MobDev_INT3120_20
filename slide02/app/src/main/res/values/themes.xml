@@ -9,7 +9,7 @@
     <style name="Theme.Slide02" parent="Base.Theme.Slide02" />
 
     <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">#62ff00</item>
+        <item name="android:tint">@color/white</item>
     </style>
 
 </resources>
