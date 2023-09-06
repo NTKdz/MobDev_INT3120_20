@@ -1,5 +1,6 @@
 package com.example.slide02
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -24,12 +25,18 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         setupNumberPicker();
+
+        binding.toolbar.setTitleTextColor(Color.WHITE)
+        binding.toolbar.setSubtitleTextColor(Color.WHITE)
+
+        binding.progressBar.progress = 20
     }
 
     private fun setupNumberPicker() {
         val numberPicker = binding.selectNum
-        numberPicker.minValue = 0
+        numberPicker.minValue = 100
         numberPicker.maxValue = 1000
+        numberPicker.value = 900
         numberPicker.wrapSelectorWheel = true
         numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
             val text = "Changed from $oldVal to $newVal"
@@ -43,9 +50,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)

@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,6 +83,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:indeterminateTintMode="src_in"
+            android:indeterminateTint="@color/primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectNum" />
 
@@ -95,7 +99,7 @@
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Amount"
                 android:textColor="#7f7f7f"
                 android:textSize="18sp"
@@ -124,9 +128,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:backgroundTint="#7f7f7f"
+                android:background="@drawable/rectangle"
                 android:text="DONATE"
-                android:textColor="#b6b8b6"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -148,7 +152,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/primary"
             android:contentDescription="send"
+            android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/relativeLayout"
             app:srcCompat="@android:drawable/ic_dialog_email" />
