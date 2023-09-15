@@ -17,6 +17,8 @@
 
     <Spinner
         android:id="@+id/spinner"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="fill_parent"
         android:minHeight="48dp"
         android:layout_height="wrap_content">
