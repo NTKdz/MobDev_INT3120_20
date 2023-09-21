@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
 fun App() {
     val context = LocalContext.current
     var presses by remember { mutableStateOf(0) }
+    var tabSelected by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -66,13 +67,12 @@ fun App() {
                     }
                 },
                 actions = {
-                    OptionMenu()
+                    OptionMenu(onTabSelected= { tabSelected = it })
                 }
             )
         },
         bottomBar = {
             BottomAppBar(
-
                 contentColor = MaterialTheme.colorScheme.primary,
             ) {
                 Text(
@@ -96,19 +96,21 @@ fun App() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ContextMenu(name = "ContextMenu", dropdownItems = listOf(
-                DropDownItem("Item 1"),
-                DropDownItem("Item 2"),
-                DropDownItem("Item 3"),
-            ), onItemClick = {
-                Toast.makeText(
-                    context,
-                    it.text,
-                    Toast.LENGTH_LONG
-                ).show()
-            })
-
-            PopupMenu();
+            if (tabSelected == "context") {
+                ContextMenu(name = "ContextMenu", dropdownItems = listOf(
+                    DropDownItem("Item 1"),
+                    DropDownItem("Item 2"),
+                    DropDownItem("Item 3"),
+                ), onItemClick = {
+                    Toast.makeText(
+                        context,
+                        it.text,
+                        Toast.LENGTH_LONG
+                    ).show()
+                })
+            } else {
+                PopupMenu();
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun OptionMenu() {
+fun OptionMenu(onTabSelected: (String)->Unit) {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
@@ -35,8 +35,14 @@ fun OptionMenu() {
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            DropdownMenuItem(text = { Text("Refresh") }, onClick = {
-                Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+            DropdownMenuItem(text = { Text("context") }, onClick = {
+                Toast.makeText(context, "context", Toast.LENGTH_SHORT).show()
+                onTabSelected("context");
+                expanded = false;
+            })
+            DropdownMenuItem(text = { Text("popup") }, onClick = {
+                Toast.makeText(context, "popup", Toast.LENGTH_SHORT).show()
+                onTabSelected("popup");
                 expanded = false;
             })
         }
