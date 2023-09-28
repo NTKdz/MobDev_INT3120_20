@@ -1,7 +1,11 @@
 package com.example.slide08
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -19,9 +23,11 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.slide08.components.ImplicitIntent
@@ -30,11 +36,17 @@ import com.example.slide08.ui.theme.Slide08Theme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    private val receiver = BroadcastReceiver();
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        registerReceiver(receiver, IntentFilter("TEST_ACTION2"))
         setContent {
             Slide08Theme {
+                val context = LocalContext.current
+
                 // A surface container using the 'background' color from the theme
                 val scope = rememberCoroutineScope()
                 val snackbarHostState = remember { SnackbarHostState() }
@@ -66,10 +78,10 @@ class MainActivity : ComponentActivity() {
 
                         Button(onClick = {
                             Intent().also { intent ->
-                                intent.action = "TEST_ACTION"
+                                intent.action = "TEST_ACTION2"
                                 intent.putExtra("data", "Nothing to see here, move along.")
                                 sendBroadcast(intent)
-                            },
+                            }
                         }, modifier = Modifier.fillMaxWidth()) {
                             Text(text = "Send Broadcast")
                         }
@@ -79,6 +91,12 @@ class MainActivity : ComponentActivity() {
 
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+        Log.d("out","unregister")
     }
 }
 

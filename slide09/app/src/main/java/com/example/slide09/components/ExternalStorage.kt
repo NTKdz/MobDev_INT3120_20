@@ -33,6 +33,9 @@ fun ExternalSto() {
     val message = remember {
         mutableStateOf("")
     }
+    val fileName = remember {
+        mutableStateOf("")
+    }
     val txtMsg = remember {
         mutableStateOf("")
     }
@@ -60,6 +63,15 @@ fun ExternalSto() {
             singleLine = true,
         )
 
+        TextField(
+            value = fileName.value,
+            onValueChange = { fileName.value = it },
+            placeholder = { Text(text = "Enter your file name") },
+            modifier = Modifier
+                .fillMaxWidth(),
+            singleLine = true,
+        )
+
         Button(
             onClick = {
                 try {
@@ -70,15 +82,12 @@ fun ExternalSto() {
                     val folder: File =
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 
-                    val file = File(folder, "demoEx.txt")
+                    val file = File(folder, fileName.value + "txt")
                     writeTextData(file, message.value, context)
                     message.value = ""
-                    Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-                message.value = ""
-                Toast.makeText(context, "Data saved", Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -109,7 +118,7 @@ fun ExternalSto() {
             onClick = {
                 val folder =
                     Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                val file = File(folder, "demoEx.txt")
+                val file = File(folder, fileName.value + ".txt")
                 val data: String = getdata(file)
                 if (data != "") {
                     txtMsg.value = getdata(file)
