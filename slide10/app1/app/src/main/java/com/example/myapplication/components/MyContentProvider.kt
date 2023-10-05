@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
+import android.util.Log
 
 class MyContentProvider : ContentProvider() {
     companion object {
@@ -26,7 +27,7 @@ class MyContentProvider : ContentProvider() {
         const val TABLE_NAME = "Users"
         const val DATABASE_VERSION = 1
         const val CREATE_DB_TABLE =
-            (" CREATE TABLE " + TABLE_NAME
+            ("CREATE TABLE " + TABLE_NAME
                     + " (id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + " name TEXT NOT NULL);")
 
@@ -55,6 +56,7 @@ class MyContentProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         val context = context
         val dbHelper = DatabaseHelper(context)
+        dbHelper.writableDatabase.execSQL("delete from $TABLE_NAME")
         db = dbHelper.writableDatabase
         return db != null
     }
@@ -121,14 +123,15 @@ class MyContentProvider : ContentProvider() {
 
     private var db: SQLiteDatabase? = null
 
-    private class DatabaseHelper
-    internal constructor(context: Context?) : SQLiteOpenHelper(
+    private class DatabaseHelper(context: Context?) : SQLiteOpenHelper(
         context,
         DATABASE_NAME,
         null,
         DATABASE_VERSION
     ) {
         override fun onCreate(db: SQLiteDatabase) {
+            Log.d("fdasfa", "fdsafa")
+            db.execSQL("delete from $TABLE_NAME")
             db.execSQL(CREATE_DB_TABLE)
         }
 
@@ -140,5 +143,6 @@ class MyContentProvider : ContentProvider() {
             db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
             onCreate(db)
         }
+
     }
 }

@@ -53,6 +53,25 @@ class MainActivity : ComponentActivity() {
             mBound = false
         }
     }
+
+    var iRemoteService: IRemoteService? = null
+
+    val mConnection = object : ServiceConnection {
+
+        // Called when the connection with the service is established.
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            // Following the preceding example for an AIDL interface,
+            // this gets an instance of the IRemoteInterface, which we can use to call on the service.
+            iRemoteService = IRemoteService.Stub.asInterface(service)
+        }
+
+        // Called when the connection with the service disconnects unexpectedly.
+        override fun onServiceDisconnected(className: ComponentName) {
+            Log.e("TAG", "Service has unexpectedly disconnected")
+            iRemoteService = null
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         Intent(this, MyService::class.java).also { intent ->

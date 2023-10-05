@@ -82,9 +82,9 @@ fun dictionary() {
     } else {
         "No Records Found"
     }
-    Column() {
-        Text(text = text)
-    }
+//    Column() {
+//        Text(text = text)
+//    }
 }
 
 @SuppressLint("Range")
