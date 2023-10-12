@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.slide12.components.Camera
 import com.example.slide12.components.Sensor
 import com.example.slide12.components.Telephone
 import com.example.slide12.components.Wifi
@@ -54,12 +55,16 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Button(onClick = { current = "telephone" }) {
                 Text(text = "Telephone")
             }
+            Button(onClick = { current = "camera" }) {
+                Text(text = "camera")
+            }
         }
 
         when (current) {
             "sensor" -> Sensor()
             "wifi" -> Wifi()
             "telephone" -> Telephone()
+            "camera" -> Camera()
         }
     }
 }

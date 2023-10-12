@@ -51,7 +51,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.bluetooth:bluetooth:1.0.0-alpha01")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
