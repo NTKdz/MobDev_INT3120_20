@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting() {
-    val mUrl = "https://archive.org/"
+    val mUrl = "https://trends.google.com.vn/trends/"
     AndroidView(factory = {
         WebView(it).apply {
             layoutParams = ViewGroup.LayoutParams(
