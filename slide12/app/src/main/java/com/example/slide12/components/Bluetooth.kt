@@ -25,16 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
+
 @Composable
 fun Bluetooth() {
     val context = LocalContext.current
-
     val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     val bluetoothAdapter = bluetoothManager.adapter
-    if(bluetoothAdapter==null){
-        Log.d("fdafs","fasfadfadsf")
+    if (bluetoothAdapter == null) {
+        Log.d("bluetooth", "null")
     } else {
-        var isEnabled by remember { mutableStateOf(bluetoothAdapter.isEnabled) }
+        var isOn by remember { mutableStateOf(bluetoothAdapter.isEnabled) }
         var discoverability by remember {
             mutableStateOf(
                 when (try {
@@ -43,19 +43,19 @@ fun Bluetooth() {
                     BluetoothAdapter.SCAN_MODE_NONE
                 }
                 ) {
-                    BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE -> "Discoverable"
-                    BluetoothAdapter.SCAN_MODE_CONNECTABLE -> "Connectable"
+                    BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE -> "Is Discoverable"
+                    BluetoothAdapter.SCAN_MODE_CONNECTABLE -> "Is Connectable"
                     else -> "None"
                 }
             )
         }
 
-        val receiver = object : BroadcastReceiver() {
+        val bluetoothReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 val action = intent.action
 
                 if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
-                    isEnabled = intent.getIntExtra(
+                    isOn = intent.getIntExtra(
                         BluetoothAdapter.EXTRA_STATE,
                         BluetoothAdapter.ERROR
                     ) == BluetoothAdapter.STATE_ON
@@ -63,8 +63,8 @@ fun Bluetooth() {
                     discoverability = when (intent.getIntExtra(
                         BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothAdapter.ERROR
                     )) {
-                        BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE -> "Discoverable"
-                        BluetoothAdapter.SCAN_MODE_CONNECTABLE -> "Connectable"
+                        BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE -> "Is Discoverable"
+                        BluetoothAdapter.SCAN_MODE_CONNECTABLE -> "Is Connectable"
                         else -> "None"
                     }
                 }
@@ -73,38 +73,36 @@ fun Bluetooth() {
 
         DisposableEffect(Unit) {
             context.registerReceiver(
-                receiver,
+                bluetoothReceiver,
                 IntentFilter().apply {
-                    addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
                     addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)
+                    addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
                 }
             )
 
             onDispose {
-                context.unregisterReceiver(receiver)
+                context.unregisterReceiver(bluetoothReceiver)
             }
         }
 
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
             ) {
                 Button(
                     onClick = {
                         try {
                             context.startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
                         } catch (_: SecurityException) {
-                            Log.e("Bluetooth", "Can't enable")
+                            Log.e("Bluetooth", "Can't turn on")
                         }
                     },
-                    enabled = !isEnabled
-                ) { Text(text = "Enable") }
+                    enabled = !isOn
+                ) { Text(text = "Turn on") }
 
                 Button(
                     onClick = {
@@ -118,18 +116,12 @@ fun Bluetooth() {
                             Log.e("Bluetooth", "Can't discover")
                         }
                     },
-                    enabled = discoverability != "Discoverable"
-                ) { Text(text = "Discover") }
+                    enabled = discoverability != "Is Discoverable"
+                ) { Text(text = "turn Discover") }
             }
 
             Text(
                 text = discoverability,
-                color = when (discoverability) {
-                    "Discoverable" -> Color.Green
-                    "Connectable" -> Color.Yellow
-                    else -> Color.Red
-                },
-                fontSize = 24.sp
             )
         }
     }

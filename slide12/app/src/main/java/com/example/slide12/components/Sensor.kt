@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -168,5 +169,10 @@ fun EnvironmentSensor() {
             fontFamily = FontFamily.Default,
             modifier = Modifier.padding(5.dp)
         )
+    }
+    DisposableEffect(Unit) {
+        onDispose {
+            sensorManager.unregisterListener(lightSensorEventListener)
+        }
     }
 }

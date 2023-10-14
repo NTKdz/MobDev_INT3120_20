@@ -7,7 +7,6 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,11 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,12 +33,11 @@ import java.util.Objects
 fun Context.createImageFile(): File {
     val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
     val imageFileName = "JPEG_" + timeStamp + "_"
-    val image = File.createTempFile(
+    return File.createTempFile(
         imageFileName, /* prefix */
         ".jpg", /* suffix */
         externalCacheDir      /* directory */
     )
-    return image
 }
 
 @Composable
@@ -72,6 +70,7 @@ fun Camera() {
         }
     }
 
+
     Column(
         Modifier
             .fillMaxWidth()
@@ -96,6 +95,10 @@ fun Camera() {
             )
         }
     }
+}
 
-
+@Preview
+@Composable
+fun Preview(){
+    Camera()
 }
