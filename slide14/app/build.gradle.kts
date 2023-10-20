@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.slide14"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.slide14"

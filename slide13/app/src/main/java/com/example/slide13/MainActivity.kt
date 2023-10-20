@@ -26,9 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import com.example.slide13.components.GoogleMap
 import com.example.slide13.components.MediaPlayer
 import com.example.slide13.ui.theme.Slide13Theme
 import com.google.android.gms.location.FusedLocationProviderClient
